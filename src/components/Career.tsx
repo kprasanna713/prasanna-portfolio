@@ -15,43 +15,46 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Full Stack Developer</h4>
-                <h5>Ikshan</h5>
+                <h4>Data Analyst – Physical Logistics</h4>
+                <h5>BMW Group, Oxford, UK</h5>
               </div>
-              <h3>2020</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Built 6+ complete applications using React.js. Integrated backend
-              authentication using Node.js & MongoDB. Created responsive UI/UX
-              and designed wireframes using Figma.
+              Owned end-to-end KPI reporting for logistics and inventory teams
+              using Power BI dashboards backed by SQL and AWS pipelines. Enabled
+              self-service data access for 50+ users, reduced manual reporting by
+              50%, and contributed to £1.5M cost recovery through analytics.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Senior Full Stack Developer</h4>
-                <h5>Monocept (Max Life Insurance)</h5>
+                <h4>MSc Engineering Business Management</h4>
+                <h5>University of Exeter</h5>
               </div>
-              <h3>2021</h3>
+              <h3>2023</h3>
             </div>
             <p>
-              Led two development teams on Mpro, a large-scale insurance
-              operations platform. Developed multiple modules using React.js &
-              migrated critical functionalities to Node.js microservices.
+              Advanced studies in engineering management, data-driven
+              decision-making, and business analytics. Developed strong
+              foundations in statistical analysis, project management, and
+              operational research methodologies.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Full Stack Developer</h4>
-                <h5>Logic Loop</h5>
+                <h4>Marketing Coordinator</h4>
+                <h5>Techfest IIT Bombay</h5>
               </div>
-              <h3>NOW</h3>
+              <h3>2019</h3>
             </div>
             <p>
-              Building Solid, a proprietary low-code platform using Angular,
-              Next.js & NestJS. Delivering production-ready CMS-based projects
-              including e-commerce, CRM, and import-export automation systems.
+              Coordinated marketing for Asia's largest science festival with
+              175,000+ attendees. Analyzed campaign performance metrics, executed
+              email marketing campaigns, and negotiated partnerships securing up
+              to 30% cost reductions.
             </p>
           </div>
         </div>

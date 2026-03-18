@@ -6,11 +6,14 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Full Stack Developer with 4+ years of experience building scalable web
-          applications using React.js, Angular, Next.js, Node.js, and NestJS. Skilled
-          in microservices architecture, CMS development, and low-code platforms.
-          Passionate about creating high-performance, production-ready solutions
-          from concept to deployment.
+          Data Analyst with hands-on experience delivering analytics and automation
+          solutions in large operational environments. At BMW Group, I turned complex
+          logistics and inventory data into clear insights that saved time, reduced
+          costs, and improved decision-making. I care less about fancy dashboards and
+          more about whether people actually use what I build — from Power BI
+          dashboards used daily by 50+ stakeholders, to automating six weeks of
+          quarterly reconciliation, to deploying a GenAI chatbot that lets warehouse
+          managers ask questions in plain English.
         </p>
       </div>
     </div>
