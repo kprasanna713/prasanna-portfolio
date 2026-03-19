@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 800px; height: 500px; background: #0a0e1a; font-family: 'Segoe UI', sans-serif; color: #fff; padding: 24px; overflow: hidden; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.header h1 { font-size: 18px; color: #4da6ff; }
+.header .badge { background: #1a73e8; padding: 4px 12px; border-radius: 12px; font-size: 11px; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.metric-card { background: #111827; border-radius: 10px; padding: 14px; border: 1px solid #1e293b; }
+.metric-card .label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+.metric-card .value { font-size: 24px; font-weight: 700; margin: 4px 0; }
+.metric-card .change { font-size: 11px; }
+.green { color: #22c55e; }
+.blue { color: #3b82f6; }
+.amber { color: #f59e0b; }
+.cyan { color: #06b6d4; }
+.charts { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.chart-box { background: #111827; border-radius: 10px; padding: 16px; border: 1px solid #1e293b; }
+.chart-box h3 { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 180px; padding-top: 10px; }
+.bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.bar { width: 28px; border-radius: 4px 4px 0 0; transition: height 0.3s; }
+.bar-label { font-size: 9px; color: #64748b; margin-top: 6px; }
+.gauge-container { display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center; height: 180px; }
+.gauge { position: relative; width: 120px; height: 60px; overflow: hidden; }
+.gauge-bg { width: 120px; height: 60px; border-radius: 60px 60px 0 0; background: #1e293b; position: absolute; }
+.gauge-fill { width: 120px; height: 60px; border-radius: 60px 60px 0 0; position: absolute; transform-origin: bottom center; }
+.gauge-value { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 18px; font-weight: 700; }
+.gauge-label { font-size: 10px; color: #64748b; text-align: center; }
+.bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.status-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1e293b; }
+.status-item .name { font-size: 11px; color: #cbd5e1; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; }
+.progress-bar { height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-top: 4px; }
+.progress-fill { height: 100%; border-radius: 3px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 9px; background: rgba(59,130,246,0.2); color: #60a5fa; margin: 2px; }
+.tools-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>BMW Logistics KPI Dashboard</h1>
+  <div class="badge">Live · Q4 2025</div>
+</div>
+
+<div class="metrics">
+  <div class="metric-card">
+    <div class="label">On-Time Delivery</div>
+    <div class="value green">96.8%</div>
+    <div class="change green">▲ 3.2% vs Q3</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Shipments Tracked</div>
+    <div class="value blue">12,847</div>
+    <div class="change blue">▲ 18% MoM</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Avg Transit Time</div>
+    <div class="value amber">2.4 days</div>
+    <div class="change green">▼ 0.8 days</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Cost per Unit</div>
+    <div class="value cyan">£4.12</div>
+    <div class="change green">▼ 12%</div>
+  </div>
+</div>
+
+<div class="charts">
+  <div class="chart-box">
+    <h3>Monthly Delivery Performance</h3>
+    <div class="bar-chart">
+      <div class="bar-group"><div class="bar" style="height:65%;background:#1a73e8"></div><div class="bar-label">Jul</div></div>
+      <div class="bar-group"><div class="bar" style="height:72%;background:#1a73e8"></div><div class="bar-label">Aug</div></div>
+      <div class="bar-group"><div class="bar" style="height:68%;background:#1a73e8"></div><div class="bar-label">Sep</div></div>
+      <div class="bar-group"><div class="bar" style="height:80%;background:#1a73e8"></div><div class="bar-label">Oct</div></div>
+      <div class="bar-group"><div class="bar" style="height:85%;background:#3b82f6"></div><div class="bar-label">Nov</div></div>
+      <div class="bar-group"><div class="bar" style="height:92%;background:#60a5fa"></div><div class="bar-label">Dec</div></div>
+      <div class="bar-group"><div class="bar" style="height:78%;background:#1a73e8"></div><div class="bar-label">Jan</div></div>
+      <div class="bar-group"><div class="bar" style="height:88%;background:#3b82f6"></div><div class="bar-label">Feb</div></div>
+      <div class="bar-group"><div class="bar" style="height:95%;background:#22c55e"></div><div class="bar-label">Mar</div></div>
+    </div>
+  </div>
+  <div class="chart-box">
+    <h3>KPI Status</h3>
+    <div class="gauge-container">
+      <div>
+        <div class="gauge">
+          <div class="gauge-bg"></div>
+          <div class="gauge-fill" style="background: conic-gradient(from 180deg, #22c55e 0deg, #22c55e 174deg, transparent 174deg); clip-path: inset(0 0 50% 0); border-radius: 60px 60px 0 0;"></div>
+          <div class="gauge-value green">96.8%</div>
+        </div>
+        <div class="gauge-label">On-Time Rate</div>
+      </div>
+      <div class="tools-row">
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">AWS</span>
+        <span class="tag">SAP</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

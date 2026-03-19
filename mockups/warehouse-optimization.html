@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 800px; height: 500px; background: #0a0e1a; font-family: 'Segoe UI', sans-serif; color: #fff; padding: 24px; overflow: hidden; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.header h1 { font-size: 18px; color: #f59e0b; }
+.header .badge { background: #78350f; padding: 4px 12px; border-radius: 12px; font-size: 11px; color: #fbbf24; }
+.top-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+.metric-card { background: #111827; border-radius: 10px; padding: 12px; border: 1px solid #1e293b; }
+.metric-card .label { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+.metric-card .value { font-size: 22px; font-weight: 700; margin: 3px 0; }
+.metric-card .change { font-size: 10px; }
+.green { color: #22c55e; }
+.amber { color: #f59e0b; }
+.blue { color: #3b82f6; }
+.red { color: #ef4444; }
+.cyan { color: #06b6d4; }
+.purple { color: #a78bfa; }
+.main-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.chart-box { background: #111827; border-radius: 10px; padding: 14px; border: 1px solid #1e293b; }
+.chart-box h3 { font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
+/* Scatter plot */
+.scatter { position: relative; height: 155px; border-left: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
+.dot { position: absolute; border-radius: 50%; opacity: 0.8; }
+.axis-label { position: absolute; font-size: 8px; color: #475569; }
+/* Time series */
+svg { width: 100%; }
+.bottom-row { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 12px; }
+.heatmap { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.heat-cell { aspect-ratio: 1; border-radius: 3px; }
+.heat-labels { display: flex; justify-content: space-between; margin-top: 4px; }
+.heat-labels span { font-size: 8px; color: #475569; }
+.cluster-legend { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.cluster-item { display: flex; align-items: center; gap: 6px; }
+.cluster-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cluster-item span { font-size: 10px; color: #cbd5e1; }
+.cluster-item .count { font-size: 9px; color: #64748b; margin-left: auto; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 9px; background: rgba(245,158,11,0.15); color: #fbbf24; margin: 2px; }
+.tags-row { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Warehouse Stock Optimization</h1>
+  <div class="badge">ML-Powered · Live</div>
+</div>
+
+<div class="top-row">
+  <div class="metric-card">
+    <div class="label">Stock Accuracy</div>
+    <div class="value green">98.4%</div>
+    <div class="change green">▲ 6.2%</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Overstock Reduced</div>
+    <div class="value amber">32%</div>
+    <div class="change green">▼ £180K saved</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Clusters Found</div>
+    <div class="value purple">5</div>
+    <div class="change blue">K-Means</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Forecast MAE</div>
+    <div class="value cyan">2.3%</div>
+    <div class="change green">▼ 4.1%</div>
+  </div>
+</div>
+
+<div class="main-charts">
+  <div class="chart-box">
+    <h3>K-Means Clustering — SKU Segmentation</h3>
+    <div class="scatter">
+      <!-- Cluster 1 - High volume, high turnover (green) -->
+      <div class="dot" style="width:10px;height:10px;background:#22c55e;left:72%;top:15%"></div>
+      <div class="dot" style="width:8px;height:8px;background:#22c55e;left:68%;top:22%"></div>
+      <div class="dot" style="width:12px;height:12px;background:#22c55e;left:78%;top:18%"></div>
+      <div class="dot" style="width:9px;height:9px;background:#22c55e;left:75%;top:25%"></div>
+      <div class="dot" style="width:7px;height:7px;background:#22c55e;left:82%;top:12%"></div>
+      <div class="dot" style="width:10px;height:10px;background:#22c55e;left:70%;top:20%"></div>
+      <!-- Cluster 2 - Medium (blue) -->
+      <div class="dot" style="width:9px;height:9px;background:#3b82f6;left:42%;top:40%"></div>
+      <div class="dot" style="width:11px;height:11px;background:#3b82f6;left:48%;top:45%"></div>
+      <div class="dot" style="width:8px;height:8px;background:#3b82f6;left:45%;top:38%"></div>
+      <div class="dot" style="width:10px;height:10px;background:#3b82f6;left:50%;top:42%"></div>
+      <div class="dot" style="width:7px;height:7px;background:#3b82f6;left:38%;top:48%"></div>
+      <div class="dot" style="width:9px;height:9px;background:#3b82f6;left:52%;top:35%"></div>
+      <!-- Cluster 3 - Low volume (amber) -->
+      <div class="dot" style="width:8px;height:8px;background:#f59e0b;left:15%;top:65%"></div>
+      <div class="dot" style="width:10px;height:10px;background:#f59e0b;left:20%;top:70%"></div>
+      <div class="dot" style="width:7px;height:7px;background:#f59e0b;left:12%;top:72%"></div>
+      <div class="dot" style="width:9px;height:9px;background:#f59e0b;left:25%;top:68%"></div>
+      <div class="dot" style="width:11px;height:11px;background:#f59e0b;left:18%;top:60%"></div>
+      <!-- Cluster 4 - Dead stock (red) -->
+      <div class="dot" style="width:7px;height:7px;background:#ef4444;left:8%;top:85%"></div>
+      <div class="dot" style="width:9px;height:9px;background:#ef4444;left:12%;top:88%"></div>
+      <div class="dot" style="width:6px;height:6px;background:#ef4444;left:15%;top:82%"></div>
+      <div class="dot" style="width:8px;height:8px;background:#ef4444;left:5%;top:90%"></div>
+      <!-- Cluster 5 - Seasonal (purple) -->
+      <div class="dot" style="width:10px;height:10px;background:#a78bfa;left:58%;top:55%"></div>
+      <div class="dot" style="width:8px;height:8px;background:#a78bfa;left:62%;top:52%"></div>
+      <div class="dot" style="width:9px;height:9px;background:#a78bfa;left:55%;top:58%"></div>
+      <div class="dot" style="width:7px;height:7px;background:#a78bfa;left:65%;top:50%"></div>
+      <!-- Axis labels -->
+      <span class="axis-label" style="bottom:-14px;left:45%">Turnover Rate →</span>
+      <span class="axis-label" style="top:45%;left:-12px;transform:rotate(-90deg)">Volume →</span>
+    </div>
+    <div class="cluster-legend" style="flex-direction:row;gap:12px;margin-top:14px;flex-wrap:wrap">
+      <div class="cluster-item"><div class="cluster-dot" style="background:#22c55e"></div><span>Fast Movers</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#3b82f6"></div><span>Steady</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#f59e0b"></div><span>Slow</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#ef4444"></div><span>Dead Stock</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#a78bfa"></div><span>Seasonal</span></div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>Demand Forecast — Time Series (ARIMA)</h3>
+    <svg viewBox="0 0 340 155" style="height:155px">
+      <defs>
+        <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Grid -->
+      <line x1="0" y1="38" x2="340" y2="38" stroke="#1e293b" stroke-width="0.5"/>
+      <line x1="0" y1="76" x2="340" y2="76" stroke="#1e293b" stroke-width="0.5"/>
+      <line x1="0" y1="114" x2="340" y2="114" stroke="#1e293b" stroke-width="0.5"/>
+      <!-- Actual data line -->
+      <path d="M0,100 L28,90 L56,95 L84,75 L112,80 L140,60 L168,65 L196,45 L224,50" fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <!-- Forecast line (dashed) -->
+      <path d="M224,50 L252,40 L280,35 L308,25 L336,20" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Confidence interval -->
+      <path d="M224,50 L252,32 L280,25 L308,15 L336,8 L336,32 L308,35 L280,45 L252,48 L224,50Z" fill="#f59e0b" opacity="0.1"/>
+      <!-- Divider line -->
+      <line x1="224" y1="0" x2="224" y2="140" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="180" y="148" fill="#64748b" font-size="8">Actual</text>
+      <text x="250" y="148" fill="#fbbf24" font-size="8">Forecast</text>
+      <!-- Data points -->
+      <circle cx="0" cy="100" r="3" fill="#f59e0b"/>
+      <circle cx="56" cy="95" r="3" fill="#f59e0b"/>
+      <circle cx="112" cy="80" r="3" fill="#f59e0b"/>
+      <circle cx="168" cy="65" r="3" fill="#f59e0b"/>
+      <circle cx="224" cy="50" r="3" fill="#f59e0b"/>
+    </svg>
+    <div class="tags-row">
+      <span class="tag">Python</span>
+      <span class="tag">K-Means</span>
+      <span class="tag">Time-Series</span>
+      <span class="tag">SAP</span>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-row">
+  <div class="chart-box">
+    <h3>Stock Level Heatmap — Zones A-G (Last 5 Weeks)</h3>
+    <div class="heatmap">
+      <!-- Week 1 -->
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#f59e0b"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#ef4444"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <!-- Week 2 -->
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#f59e0b"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#f59e0b"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <!-- Week 3 -->
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#f59e0b"></div>
+      <!-- Week 4 -->
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <!-- Week 5 -->
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+      <div class="heat-cell" style="background:#22c55e"></div>
+      <div class="heat-cell" style="background:#166534"></div>
+    </div>
+    <div class="heat-labels">
+      <span>Zone A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>Zone G</span>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>Optimization Results</h3>
+    <div class="cluster-legend">
+      <div class="cluster-item"><div class="cluster-dot" style="background:#22c55e"></div><span>Stockouts reduced</span><span class="count green">-67%</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#3b82f6"></div><span>Carrying cost saved</span><span class="count blue">£180K</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#f59e0b"></div><span>Reorder accuracy</span><span class="count amber">94.8%</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#a78bfa"></div><span>SKUs optimized</span><span class="count purple">2,340</span></div>
+      <div class="cluster-item"><div class="cluster-dot" style="background:#06b6d4"></div><span>Forecast horizon</span><span class="count cyan">12 weeks</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 800px; height: 500px; background: #0a0e1a; font-family: 'Segoe UI', sans-serif; color: #fff; padding: 24px; overflow: hidden; display: flex; gap: 16px; }
+.chat-panel { flex: 1.2; display: flex; flex-direction: column; background: #111827; border-radius: 14px; border: 1px solid #1e293b; overflow: hidden; }
+.chat-header { background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.bot-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.chat-header-info h3 { font-size: 14px; }
+.chat-header-info span { font-size: 10px; color: rgba(255,255,255,0.7); }
+.online-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; display: inline-block; margin-right: 4px; }
+.chat-messages { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+.message { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 12px; line-height: 1.5; }
+.bot-msg { background: #1e293b; align-self: flex-start; border-bottom-left-radius: 4px; }
+.user-msg { background: linear-gradient(135deg, #7c3aed, #4f46e5); align-self: flex-end; border-bottom-right-radius: 4px; }
+.typing { display: flex; gap: 4px; padding: 10px 14px; background: #1e293b; border-radius: 14px; align-self: flex-start; width: 60px; }
+.typing span { width: 6px; height: 6px; background: #64748b; border-radius: 50%; }
+.chat-input { padding: 12px 16px; border-top: 1px solid #1e293b; display: flex; align-items: center; gap: 8px; }
+.chat-input input { flex: 1; background: #1e293b; border: none; padding: 10px 14px; border-radius: 20px; color: #fff; font-size: 12px; }
+.send-btn { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, #4f46e5); border: none; color: #fff; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.stats-panel { flex: 0.8; display: flex; flex-direction: column; gap: 12px; }
+.stat-card { background: #111827; border-radius: 10px; padding: 14px; border: 1px solid #1e293b; }
+.stat-card h4 { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.stat-card .value { font-size: 24px; font-weight: 700; }
+.purple { color: #a78bfa; }
+.green { color: #22c55e; }
+.blue { color: #3b82f6; }
+.amber { color: #f59e0b; }
+.stat-card .sub { font-size: 10px; color: #64748b; margin-top: 2px; }
+.arch-card { background: #111827; border-radius: 10px; padding: 14px; border: 1px solid #1e293b; flex: 1; }
+.arch-card h4 { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.arch-flow { display: flex; flex-direction: column; gap: 8px; }
+.arch-item { display: flex; align-items: center; gap: 8px; }
+.arch-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.arch-item span { font-size: 10px; color: #cbd5e1; }
+.arrow-down { color: #4f46e5; font-size: 14px; margin-left: 10px; }
+.tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 9px; background: rgba(124,58,237,0.2); color: #a78bfa; margin: 2px; }
+.tags-section { margin-top: auto; }
+.tags-section h4 { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.intent-bar { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+.intent-bar .name { font-size: 10px; color: #94a3b8; width: 65px; }
+.intent-bar .bar { flex: 1; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+.intent-bar .fill { height: 100%; border-radius: 3px; }
+.intent-bar .pct { font-size: 9px; color: #64748b; width: 28px; text-align: right; }
+</style>
+</head>
+<body>
+<div class="chat-panel">
+  <div class="chat-header">
+    <div class="bot-avatar">🤖</div>
+    <div class="chat-header-info">
+      <h3>Analytics Assistant</h3>
+      <span><span class="online-dot"></span>Online · Self-Service AI Chatbot</span>
+    </div>
+  </div>
+  <div class="chat-messages">
+    <div class="message bot-msg">Hi! I'm your Analytics Assistant. I can help you query data, generate reports, and find insights. What would you like to know?</div>
+    <div class="message user-msg">Show me the top 5 products by revenue this quarter</div>
+    <div class="message bot-msg">Here are the top 5 products by revenue for Q4 2025:<br><br>
+    1. Product Alpha — £245,000 ▲12%<br>
+    2. Product Beta — £198,500 ▲8%<br>
+    3. Product Gamma — £176,200 ▲15%<br>
+    4. Product Delta — £152,800 ▲3%<br>
+    5. Product Epsilon — £134,600 ▲21%<br><br>
+    Would you like me to break this down by region?</div>
+    <div class="message user-msg">Yes, break it down by UK region</div>
+    <div class="message bot-msg">Querying AWS Athena for regional breakdown... Here are the results by UK region:</div>
+    <div class="typing"><span></span><span></span><span></span></div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Ask me anything about your data..." />
+    <button class="send-btn">➤</button>
+  </div>
+</div>
+
+<div class="stats-panel">
+  <div class="stat-card">
+    <h4>Queries Handled</h4>
+    <div class="value purple">14,283</div>
+    <div class="sub">This month</div>
+  </div>
+  <div class="stat-card">
+    <h4>Accuracy Rate</h4>
+    <div class="value green">97.3%</div>
+    <div class="sub">Response accuracy</div>
+  </div>
+  <div class="stat-card">
+    <h4>Avg Response</h4>
+    <div class="value blue">1.8s</div>
+    <div class="sub">Query to answer</div>
+  </div>
+
+  <div class="stat-card">
+    <h4>Top Intents</h4>
+    <div class="intent-bar">
+      <span class="name">Revenue</span>
+      <div class="bar"><div class="fill" style="width:85%;background:#7c3aed"></div></div>
+      <span class="pct">34%</span>
+    </div>
+    <div class="intent-bar">
+      <span class="name">Inventory</span>
+      <div class="bar"><div class="fill" style="width:60%;background:#4f46e5"></div></div>
+      <span class="pct">24%</span>
+    </div>
+    <div class="intent-bar">
+      <span class="name">Shipping</span>
+      <div class="bar"><div class="fill" style="width:45%;background:#6366f1"></div></div>
+      <span class="pct">18%</span>
+    </div>
+    <div class="intent-bar">
+      <span class="name">Returns</span>
+      <div class="bar"><div class="fill" style="width:30%;background:#818cf8"></div></div>
+      <span class="pct">12%</span>
+    </div>
+  </div>
+
+  <div class="tags-section">
+    <div class="stat-card">
+      <h4>Tech Stack</h4>
+      <span class="tag">Python</span>
+      <span class="tag">AWS Athena</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">LangChain</span>
+      <span class="tag">NLP</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

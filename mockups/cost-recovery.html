@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 800px; height: 500px; background: #0a0e1a; font-family: 'Segoe UI', sans-serif; color: #fff; padding: 24px; overflow: hidden; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.header h1 { font-size: 18px; color: #22c55e; }
+.header .badge { background: #166534; padding: 4px 12px; border-radius: 12px; font-size: 11px; color: #86efac; }
+.top-section { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 14px; }
+.big-metric { background: linear-gradient(135deg, #064e3b, #022c22); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #166534; }
+.big-metric .pound { font-size: 42px; font-weight: 800; color: #22c55e; text-shadow: 0 0 30px rgba(34,197,94,0.3); }
+.big-metric .sub { font-size: 12px; color: #86efac; margin-top: 4px; }
+.big-metric .recovered { font-size: 10px; color: #4ade80; background: rgba(34,197,94,0.15); padding: 4px 12px; border-radius: 8px; margin-top: 8px; }
+.line-chart-box { background: #111827; border-radius: 12px; padding: 16px; border: 1px solid #1e293b; }
+.line-chart-box h3 { font-size: 12px; color: #94a3b8; margin-bottom: 10px; }
+svg { width: 100%; }
+.metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+.metric-card { background: #111827; border-radius: 10px; padding: 14px; border: 1px solid #1e293b; }
+.metric-card .label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+.metric-card .value { font-size: 22px; font-weight: 700; margin: 4px 0; }
+.metric-card .change { font-size: 11px; }
+.green { color: #22c55e; }
+.amber { color: #f59e0b; }
+.red { color: #ef4444; }
+.blue { color: #3b82f6; }
+.bottom-section { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.chart-box { background: #111827; border-radius: 10px; padding: 16px; border: 1px solid #1e293b; }
+.chart-box h3 { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+.pie-container { display: flex; justify-content: center; align-items: center; gap: 16px; }
+.pie { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#22c55e 0deg 130deg, #3b82f6 130deg 220deg, #f59e0b 220deg 290deg, #ef4444 290deg 360deg); position: relative; }
+.pie::after { content: ''; position: absolute; top: 25px; left: 25px; width: 60px; height: 60px; border-radius: 50%; background: #111827; }
+.legend { display: flex; flex-direction: column; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #cbd5e1; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.recovery-list { }
+.recovery-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e293b; }
+.recovery-item .name { font-size: 11px; color: #cbd5e1; }
+.recovery-item .amount { font-size: 11px; font-weight: 600; }
+.progress-bar { height: 4px; background: #1e293b; border-radius: 2px; margin-top: 4px; }
+.progress-fill { height: 100%; border-radius: 2px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 9px; background: rgba(34,197,94,0.15); color: #4ade80; margin: 2px; }
+.tools-row { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Cost Recovery Analytics</h1>
+  <div class="badge">✓ £1.5M Recovered</div>
+</div>
+
+<div class="top-section">
+  <div class="big-metric">
+    <div class="pound">£1.5M</div>
+    <div class="sub">Total Cost Recovered</div>
+    <div class="recovered">▲ 142% vs Target</div>
+  </div>
+  <div class="line-chart-box">
+    <h3>Monthly Recovery Trend (£K)</h3>
+    <svg viewBox="0 0 440 140" style="height:140px">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,120 L40,110 L80,95 L120,100 L160,80 L200,60 L240,55 L280,40 L320,30 L360,20 L400,10 L440,5" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+      <path d="M0,120 L40,110 L80,95 L120,100 L160,80 L200,60 L240,55 L280,40 L320,30 L360,20 L400,10 L440,5 L440,140 L0,140Z" fill="url(#g1)"/>
+      <circle cx="440" cy="5" r="4" fill="#22c55e"/>
+      <circle cx="400" cy="10" r="3" fill="#22c55e" opacity="0.6"/>
+      <circle cx="360" cy="20" r="3" fill="#22c55e" opacity="0.6"/>
+      <!-- Grid lines -->
+      <line x1="0" y1="35" x2="440" y2="35" stroke="#1e293b" stroke-width="0.5"/>
+      <line x1="0" y1="70" x2="440" y2="70" stroke="#1e293b" stroke-width="0.5"/>
+      <line x1="0" y1="105" x2="440" y2="105" stroke="#1e293b" stroke-width="0.5"/>
+      <text x="0" y="130" fill="#64748b" font-size="8">Jan</text>
+      <text x="76" y="130" fill="#64748b" font-size="8">Mar</text>
+      <text x="156" y="130" fill="#64748b" font-size="8">May</text>
+      <text x="236" y="130" fill="#64748b" font-size="8">Jul</text>
+      <text x="316" y="130" fill="#64748b" font-size="8">Sep</text>
+      <text x="396" y="130" fill="#64748b" font-size="8">Nov</text>
+    </svg>
+  </div>
+</div>
+
+<div class="metrics-row">
+  <div class="metric-card">
+    <div class="label">Root Causes Found</div>
+    <div class="value amber">847</div>
+    <div class="change green">▲ 23 this week</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Recovery Rate</div>
+    <div class="value green">94.2%</div>
+    <div class="change green">▲ 8.5%</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Avg Resolution</div>
+    <div class="value blue">3.2 days</div>
+    <div class="change green">▼ 1.8 days</div>
+  </div>
+</div>
+
+<div class="bottom-section">
+  <div class="chart-box">
+    <h3>Cost Breakdown by Category</h3>
+    <div class="pie-container">
+      <div class="pie"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Inventory Gaps — 36%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Shipping Errors — 25%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Return Losses — 19%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Vendor Issues — 20%</div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-box">
+    <h3>Top Recoveries</h3>
+    <div class="recovery-list">
+      <div class="recovery-item"><span class="name">Warehouse A — Stock Mismatch</span><span class="amount green">£420K</span></div>
+      <div class="recovery-item"><span class="name">Supplier X — Overcharge</span><span class="amount green">£310K</span></div>
+      <div class="recovery-item"><span class="name">Logistics — Duplicate Billing</span><span class="amount green">£285K</span></div>
+      <div class="recovery-item"><span class="name">Returns — Unprocessed Credits</span><span class="amount green">£195K</span></div>
+    </div>
+    <div class="tools-row">
+      <span class="tag">SQL</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">Python</span>
+      <span class="tag">Root-Cause Analysis</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
