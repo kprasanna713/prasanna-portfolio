@@ -8,25 +8,25 @@ const projects = [
     title: "BMW Logistics KPI Automation",
     category: "Business Intelligence",
     tools: "SQL, Power BI, AWS, SAP",
-    image: import.meta.env.BASE_URL + "images/placeholder.webp",
+    image: import.meta.env.BASE_URL + "images/bmw-dashboard.webp",
   },
   {
     title: "£1.5M Cost Recovery Analytics",
     category: "Inventory Analytics",
     tools: "SQL, Power BI, Python, Root-Cause Analysis",
-    image: import.meta.env.BASE_URL + "images/placeholder.webp",
+    image: import.meta.env.BASE_URL + "images/cost-recovery.webp",
   },
   {
     title: "Self-Service AI Chatbot",
     category: "GenAI & Analytics",
     tools: "Python, AWS Athena, Pandas, LangChain",
-    image: import.meta.env.BASE_URL + "images/placeholder.webp",
+    image: import.meta.env.BASE_URL + "images/ai-chatbot.webp",
   },
   {
     title: "Warehouse Stock Optimization",
     category: "Machine Learning",
     tools: "Python, K-Means, Time-Series, SAP",
-    image: import.meta.env.BASE_URL + "images/placeholder.webp",
+    image: import.meta.env.BASE_URL + "images/warehouse-optimization.webp",
   },
 ];
 
