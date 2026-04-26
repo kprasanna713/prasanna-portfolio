@@ -104,7 +104,7 @@ class DataAnalyst:
 
 <div align="center">
   <a href="https://kprasanna713.github.io/prasanna-portfolio/" target="_blank">
-    <img src="public/images/preview.png" alt="Portfolio Preview" width="80%" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);"/>
+    <img src="https://image.thum.io/get/width/1200/crop/750/noanimate/https://kprasanna713.github.io/prasanna-portfolio/" alt="Portfolio Preview" width="80%" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);"/>
   </a>
 
   <br/><br/>
